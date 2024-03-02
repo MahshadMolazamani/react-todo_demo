@@ -16,11 +16,10 @@ function NewTodoForm(props) {
 
     const submitTodo = () => {
         if (description !== '' && assigned !== ''){
-            props.addTodo(description, assigned)
+            props.addTodo(description, assigned);
+            setDescription('');
+            setAssigned('');
         }
-        setDescription('');
-        setAssigned('');
-
     };
 
     return(
