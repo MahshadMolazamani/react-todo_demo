@@ -1,27 +1,30 @@
 import React, {useState} from "react";
 import './App.css';
 import TodoTable from "./components/TodoTable";
+import NewTodoForm from "./components/NewTodoForm";
 
 function App() {
 
-    const todos = [
+    const [todos, setTodos] =  useState([
         {rowNumber: 1, rowDescription: 'Feed puppy', rowAssigned: 'User one'},
         {rowNumber: 2, rowDescription: 'Water plants', rowAssigned: 'User two'},
         {rowNumber: 3, rowDescription: 'Make dinner', rowAssigned: 'User one'},
         {rowNumber: 4, rowDescription: 'charge phone', rowAssigned: 'User two'}
-    ]
+    ])
 
-    const addTodo = () => {
+    const addTodo = (description, assigned) => {
+
         if (todos.length > 0) {
             const newTodo = {
                 rowNumber: todos.length + 1,
-                rowDescription: 'New Todo',
-                rowAssigned: 'User Three'
+                rowDescription: description,
+                rowAssigned: assigned
             }
-            todos.push(newTodo);
-            console.log(newTodo);
+            setTodos(todos => [...todos, newTodo]);
+
         }
-    }
+    };
+
 
 
   return (
@@ -32,9 +35,10 @@ function App() {
             </div>
             <div className='card-body'>
                 <TodoTable todos={todos} />
-                <button className='btn btn-primary' onClick={addTodo}>
+                <button className='btn btn-primary' >
                     Add new todo
                 </button>
+                <NewTodoForm addTodo={addTodo} />
             </div>
         </div>
     </div>
