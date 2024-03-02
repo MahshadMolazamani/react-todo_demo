@@ -3,7 +3,7 @@ import './App.css';
 import TodoTable from "./components/TodoTable";
 import NewTodoForm from "./components/NewTodoForm";
 
-function App() {
+function App(props) {
 
     const [todos, setTodos] =  useState([
         {rowNumber: 1, rowDescription: 'Feed puppy', rowAssigned: 'User one'},
@@ -26,9 +26,14 @@ function App() {
                 rowAssigned: assigned
             }
             setTodos(todos => [...todos, newTodo]);
-
-
     };
+
+    const deleteTodo = (deleteTodoRowNumber) => {
+        let filtered = todos.filter( function (value) {
+            return value.rowNumber !== deleteTodoRowNumber;
+        });
+        setTodos(filtered);
+    }
 
 
 
@@ -39,7 +44,7 @@ function App() {
                 Your todo's
             </div>
             <div className='card-body'>
-                <TodoTable todos={todos} />
+                <TodoTable todos={todos} deleteTodo={deleteTodo}/>
                 <button className='btn btn-primary' >
                     Add new todo
                 </button>
